@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hockey Lineup Builder</title>
+  <style>
+    @media print {
+        #players {
+            display: none;
+        }
+
+        .section-title {
+            display: none;
+        }
+
+        .slot {
+            border: none;
+            background: none;
+            height: auto;
+            width: auto;
+            font-size: 16px;
+            padding: 4px;
+            &:empty {
+                display: none;
+            }
+        }
+        
+        .item {
+            background: none;
+            border: none;
+            cursor: default;
+            padding: 0;
+        }
+        .slot-title {
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 2px;
+        }
+    }
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .section-title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+    .slot {
+      width: 200px;
+      height: 40px;
+      border: 2px dashed #999;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9f9f9;
+    }
+    .item {
+      padding: 6px 10px;
+      background: #d9eaff;
+      border: 1px solid #7aa7d9;
+      border-radius: 4px;
+      cursor: grab;
+      user-select: none;
+    }
+    .center {
+        align-self: center;
+        gap: 10px;
+        .row {
+            margin-top: 10px;
+        }
+    }
+    .number {
+        margin-right: 4px;
+    }
+
+    .slot-title {
+        width: 200px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    .row.header {
+        margin-bottom: 6px;
+    }
+
+    .save-btn {
+        background-color: #4CAF50; /* Green background */
+        color: white; /* White text */
+        border: none; /* No border */
+        padding: 25px; /* Padding of 25px */
+        font-size: 16px; /* Font size */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor on hover */
+        &:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    }
+  </style>
+</head>
+<body>
+    <div class="column">
+        <div class="section-title">Players</div>
+        <div id="players" class="column">
+            <div class="item" draggable="true"><span class="number">1</span><span class="player">Noella Angulo</span></div>
+            <div class="item" draggable="true"><span class="number">33</span><span class="player">Scarlet Bills</span></div>
+            <div class="item" draggable="true"><span class="number">71</span><span class="player">Evelyn Coey</span></div>
+            <div class="item" draggable="true"><span class="number">26</span><span class="player">Grace Flaten</span></div>
+            <div class="item" draggable="true"><span class="number">46</span><span class="player">Maisy Glaser</span></div>
+            <div class="item" draggable="true"><span class="number">21</span><span class="player">Alena Jones</span></div>
+            <div class="item" draggable="true"><span class="number">87</span><span class="player">Samantha Kalis</span></div>
+            <div class="item" draggable="true"><span class="number">34</span><span class="player">Hadley Kolar</span></div>
+            <div class="item" draggable="true"><span class="number">15</span><span class="player">Sophia Krizanac</span></div>
+            <div class="item" draggable="true"><span class="number">12</span><span class="player">Lauryn Lachicotte</span></div>
+            <div class="item" draggable="true"><span class="number">20</span><span class="player">Quinn Mason</span></div>
+            <div class="item" draggable="true"><span class="number">9</span><span class="player">Sadbh McMullin</span></div>
+            <div class="item" draggable="true"><span class="number">55</span><span class="player">Isla Nelson</span></div>
+            <div class="item" draggable="true"><span class="number">8</span><span class="player">Catherine Peters</span></div>
+            <div class="item" draggable="true"><span class="number">36</span><span class="player">Ellery Powers</span></div>
+            <div class="item" draggable="true"><span class="number">17</span><span class="player">Charlotte Purtle</span></div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="row header">
+            <div class="slot-title">LW</div>
+            <div class="slot-title">C</div>
+            <div class="slot-title">RW</div>
+        </div>
+        <!-- 4 lines: LW, C, RW -->
+        <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+        <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+        <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+        <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+        <div class="center">
+            <div class="row header">
+                <div class="slot-title">LD</div>
+                <div class="slot-title">RD</div>
+            </div>
+            <div class="row"><div class="slot"></div><div class="slot"></div></div>
+            <div class="row"><div class="slot"></div><div class="slot"></div></div>
+            <div class="row"><div class="slot"></div><div class="slot"></div></div>
+        </div>
+        <div class="center">
+            <div class="row header">
+                <div class="slot-title">G</div>
+            </div>
+            <div class="row"><div class="slot"></div>
+        </div>
+
+        <div class="center">
+            <div class="row">
+            <button id="save" class="save-btn">Save</button>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+  const playersPool = document.getElementById('players');
+  const items = document.querySelectorAll('.item');
+  const slots = document.querySelectorAll('.slot');
+  const save = document.getElementById('save');
+  let draggedItem = null;
+
+  const saved = localStorage.getItem('hockeyLineup');
+
+  load();
+
+  function load() {
+    if (!saved) {
+        return;
+    }
+    const lineup = JSON.parse(saved);
+
+    // Clear slots
+    slots.forEach(slot => {
+        if (slot.firstChild && slot.firstChild.classList.contains('item')) {
+            playersPool.appendChild(slot.firstChild);
+        }
+        slot.innerHTML = slot.innerHTML.split('<')[0]; // keep position label
+    });
+
+    // Reassign saved players
+    lineup.forEach((entry, i) => {
+        if (entry.player) {
+            const playerEl = [...playersPool.querySelectorAll('.item')]
+                .find(el => el.innerText === entry.player);
+        if (playerEl) {
+                slots[i].innerHTML = '';
+                slots[i].appendChild(playerEl);
+            }
+        }
+    });
+  }
+
+  // Enable dragging for all items
+  function enableDrag(item) {
+    item.addEventListener('dragstart', e => {
+      draggedItem = item;
+      e.dataTransfer.effectAllowed = 'move';
+      item.classList.add('dragging');
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('dragging');
+      draggedItem = null;
+    });
+  }
+
+  items.forEach(enableDrag);
+
+  // Allow dropping into slots
+  slots.forEach(slot => {
+    slot.addEventListener('dragover', e => {
+      e.preventDefault();
+      slot.style.background = '#eef';
+    });
+
+    slot.addEventListener('dragleave', () => {
+      slot.style.background = '#f9f9f9';
+    });
+
+    slot.addEventListener('drop', e => {
+      e.preventDefault();
+      slot.style.background = '#f9f9f9';
+      if (!draggedItem) return;
+
+      // If slot already has a player, move them back to pool
+      if (slot.firstChild && slot.firstChild.classList?.contains('item')) {
+        playersPool.appendChild(slot.firstChild);
+      }
+
+      slot.innerHTML = '';
+      slot.appendChild(draggedItem);
+    });
+  });
+
+  // Allow dropping back into the pool
+  playersPool.addEventListener('dragover', e => {
+    e.preventDefault();
+    playersPool.style.background = '#eef';
+  });
+
+  playersPool.addEventListener('dragleave', () => {
+    playersPool.style.background = '';
+  });
+
+  playersPool.addEventListener('drop', e => {
+    e.preventDefault();
+    playersPool.style.background = '';
+    if (!draggedItem) return;
+
+    playersPool.appendChild(draggedItem);
+  });
+
+  document.getElementById('save').addEventListener('click', () => {
+    const lineup = [];
+    slots.forEach(slot => {
+      if (slot.firstChild && slot.firstChild.classList.contains('item')) {
+        lineup.push({
+          position: slot.textContent.trim().split('\n')[0], // slot label
+          player: slot.firstChild.innerText
+        });
+      } else {
+        lineup.push({ position: slot.textContent.trim(), player: null });
+      }
+    });
+    localStorage.setItem('hockeyLineup', JSON.stringify(lineup));
+    alert('Lineup saved!');
+  });
+
+
+
+</script>
+
+</body>
+</html>
